@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            text-align: center;
+            background: black;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        h1, p {
+            font-size: 3.5em;
+            color: gold;
+            text-shadow: 4px 4px 10px rgba(255, 215, 0, 0.8);
+            font-family: 'Courier New', Courier, monospace;
+        }
+        span {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .butterfly {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            margin-top: 20px;
+            animation: flutter 2s infinite ease-in-out;
+        }
+        .butterfly .left-wing,
+        .butterfly .right-wing {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background: linear-gradient(45deg, #ff4081, #e60073);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform-origin: bottom center;
+        }
+        .butterfly .left-wing {
+            left: 0;
+            transform: rotate(-45deg);
+            animation: flap-left 1s infinite ease-in-out;
+        }
+        .butterfly .right-wing {
+            right: 0;
+            transform: rotate(45deg);
+            animation: flap-right 1s infinite ease-in-out;
+        }
+        .butterfly .body {
+            position: absolute;
+            width: 10px;
+            height: 80px;
+            background: gold;
+            left: 50%;
+            top: 10px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+        }
+        .butterfly:hover {
+            animation: flutter-hover 1s infinite ease-in-out;
+        }
+        @keyframes flutter {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes flutter-hover {
+            0%, 100% { transform: translateY(0) scale(1.1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+        @keyframes flap-left {
+            0%, 100% { transform: rotate(-45deg); }
+            50% { transform: rotate(-30deg); }
+        }
+        @keyframes flap-right {
+            0%, 100% { transform: rotate(45deg); }
+            50% { transform: rotate(30deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>To Tabark...</h1>
+    <h1 id="birthdayText">
+        <span>Wishing</span>
+        <span>You</span>
+        <span>A</span>
+        <span>Spectacular</span>
+        <span>Birthday!</span>
+        <span>🎂</span>
+    </h1>
+    <p id="proudText">
+        <span>I'm</span>
+        <span>very</span>
+        <span>proud</span>
+        <span>of</span>
+        <span>you!</span>
+    </p>
+    <div class="butterfly" onclick="showMessage()">
+        <div class="left-wing"></div>
+        <div class="right-wing"></div>
+        <div class="body"></div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        function showMessage() {
+            const birthdaySpans = document.querySelectorAll('#birthdayText span');
+            const proudSpans = document.querySelectorAll('#proudText span');
+            
+            if (clickCount === 0) {
+                birthdaySpans.forEach((span, index) => {
+                    setTimeout(() => {
+                        span.style.opacity = '1';
+                    }, index * 300); // Delay each word by 300ms
+                });
+            } else if (clickCount === 1) {
+                proudSpans.forEach((span, index) => {
+                    setTimeout(() => {
+                        span.style.opacity = '1';
+                    }, index * 300); // Delay each word by 300ms
+                });
+            }
+            clickCount++;
+        }
+
+        // Ensure the music plays automatically when the page loads
+        window.onload = function() {
+            const music = document.getElementById('birthdayMusic');
+            if (music) {
+                music.play();
+            }
+        };
+    </script>
+</body>
+</html>
